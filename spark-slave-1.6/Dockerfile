@@ -20,6 +20,6 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle
 ENV SPARK_HOME=/opt/spark
 ENV PATH=${PATH}:${SPARK_HOME}/bin
 ENV PATH=${PATH}:${SPARK_HOME}/sbin
-COPY start-master.sh /root/
+COPY start-slave.sh /root/
 CMD ["/root/start-slave.sh"]
 EXPOSE 4000-40000

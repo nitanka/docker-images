@@ -11,15 +11,16 @@ RUN apt-get update && \
     echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections && \
     apt-get install -y oracle-java8-installer && \
     mkdir /opt/package && \ 
-    cd /opt/package && \ 
+    cd /opt/ && \ 
     wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.2-bin-hadoop2.6.tgz && \
     tar -xzf spark-1.6.2-bin-hadoop2.6.tgz && \
-    mv spark-1.6.2-bin-hadoop2.6 spark 
+    mv spark-1.6.2-bin-hadoop2.6 spark && \
+    rm -r spark-1.6.2-bin-hadoop2.6.tgz 
     
 ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle
 ENV SPARK_HOME=/opt/spark
 ENV PATH=${PATH}:${SPARK_HOME}/bin
 ENV PATH=${PATH}:${SPARK_HOME}/sbin
 COPY start-master.sh /root/
-CMD ["/root/start-master.sh"]
+ENTRYPOINT ["/root/start-master.sh"]
 EXPOSE 4000-40000

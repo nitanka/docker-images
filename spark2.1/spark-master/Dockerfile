@@ -1,11 +1,3 @@
-#DOCKERFILE FOR SPARK-MASTER
-  #METADATA
-# { 
-# "imageName":"spark", 
-# "tag":"master",
-# "description":"desc"
-# }
-#METADATA
 FROM ubuntu:14.04
  
 MAINTAINER devops <nitanka.gogoi@razorthink.com>

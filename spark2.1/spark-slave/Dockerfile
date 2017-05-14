@@ -33,7 +33,10 @@ RUN apt-get update && \
     tar -xzf `basename ${PYTHON35_URL}` && \
     mv `basename -s .tgz ${PYTHON35_URL}` /usr/src/ && \
     cd /usr/src/`basename -s .tgz ${PYTHON35_URL}` && ./configure && make altinstall && \
-    python3.5 -m pip install --upgrade pip boto pyhdfs smart_open 
+    python3.5 -m pip install --upgrade pip boto pyhdfs smart_open amatplotlib sphinx_rtd_theme jsonpickle jinja2 flask flask-httpauth \
+    pandas boto3 scipy sklearn gitchangelog pythonbenchmark pyhdfs typeguard sphinx-autodoc-typehints pyyaml cython nose coloredlogs \
+    check-manifest flake8 bunch coverage
+ 
 
     
  

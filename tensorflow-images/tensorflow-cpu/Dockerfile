@@ -3,7 +3,6 @@ FROM ubuntu:14.04
 MAINTAINER devops <nitanka.gogoi@razorthink.com>
 
 ARG PYTHON35_URL="https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz"
-#ARG TENSORFLOW=""
 
 RUN apt-get update && \
     apt-get install -y software-properties-common python-software-properties curl build-essential checkinstall && \

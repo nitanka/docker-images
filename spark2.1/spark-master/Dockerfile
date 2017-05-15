@@ -13,6 +13,7 @@ RUN apt-get update && \
     apt-get install -y oracle-java8-installer && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/oracle-jdk8-installer && \
+    rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     curl -O ${SPARK_URL} && \
     tar -xzf spark-2.1.0-bin-hadoop2.7.tgz && \
@@ -22,6 +23,7 @@ RUN apt-get update && \
     chmod +x /root/start-master.sh && \
     cd /tmp && curl -O ${PYTHON35_URL} && \
     tar -xzf `basename ${PYTHON35_URL}` && \
+    rm `basename ${PYTHON35_URL}` && \
     mv `basename -s .tgz ${PYTHON35_URL}` /usr/src/ && \
     cd /usr/src/`basename -s .tgz ${PYTHON35_URL}` && ./configure && make altinstall && \
     python3.5 -m pip install --upgrade pip boto pyhdfs smart_open matplotlib sphinx_rtd_theme jsonpickle jinja2 flask flask-httpauth \

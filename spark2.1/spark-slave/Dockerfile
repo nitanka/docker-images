@@ -22,18 +22,21 @@ RUN apt-get update && \
     apt-get install -y oracle-java8-installer && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/oracle-jdk8-installer && \
+    rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     curl -O ${SPARK_URL} && \
     tar -xzf spark-2.1.0-bin-hadoop2.7.tgz && \
+    rm -rf spark-2.1.0-bin-hadoop2.7.tgz && \
     mv spark-2.1.0-bin-hadoop2.7 /opt/spark && \
     echo "#!/bin/bash" > /root/start-slave.sh && \
     echo "spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077" >> /root/start-slave.sh && \
     chmod +x /root/start-slave.sh && \
     cd /tmp && curl -O ${PYTHON35_URL} && \
     tar -xzf `basename ${PYTHON35_URL}` && \
+    rm `basename ${PYTHON35_URL}` && \
     mv `basename -s .tgz ${PYTHON35_URL}` /usr/src/ && \
     cd /usr/src/`basename -s .tgz ${PYTHON35_URL}` && ./configure && make altinstall && \
-    python3.5 -m pip install --upgrade pip boto pyhdfs smart_open amatplotlib sphinx_rtd_theme jsonpickle jinja2 flask flask-httpauth \
+    python3.5 -m pip install --upgrade pip boto pyhdfs smart_open matplotlib sphinx_rtd_theme jsonpickle jinja2 flask flask-httpauth \
     pandas boto3 scipy sklearn gitchangelog pythonbenchmark pyhdfs typeguard sphinx-autodoc-typehints pyyaml cython nose coloredlogs \
     check-manifest flake8 bunch coverage
  

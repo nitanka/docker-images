@@ -95,6 +95,8 @@ RUN echo "#!/bin/bash \n\
     chmod +x /root/start-slave.sh && \
     ln -s /root/start-slave.sh /bin/start-slave
 
+EXPOSE 9000
+EXPOSE 50070
 
 CMD [ "sh","-c","start-master" ]         
 

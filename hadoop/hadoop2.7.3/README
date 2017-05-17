@@ -1,0 +1,18 @@
+-------------------- To start hadoop namenode -----------------------------------------
+- create the swarm
+- create the network 
+- join the nodes to the swarm
+- to start the namenode execute the following command:
+
+          docker service create --name hadoop-namenode --hostname hadoop-namenode \
+          --network <network-name> --publish 50070:50070 hadoop:v2 start-master 
+
+---------------------------------------------------------------------------------------
+
+-------------------- To start hadoop datanode -----------------------------------------
+
+- to start the namenode execute the following command:
+
+          docker service create --name hadoop-namenode --hostname hadoop-namenode \ 
+          --network <network-name> hadoop:v2 start-master 
+---------------------------------------------------------------------------------------

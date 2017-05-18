@@ -13,6 +13,6 @@
 
 - to start the namenode execute the following command:
 
-          docker service create --name hadoop-namenode --hostname hadoop-namenode \ 
-          --network <network-name> hadoop:v2 start-master 
+          docker service create --name <service-name>  \ 
+          --network <network-name> hadoop:v2 start-slave 
 ---------------------------------------------------------------------------------------

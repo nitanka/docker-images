@@ -1,40 +1,12 @@
-In an attempt to run Spark standalone cluster in a Docker Swarm
 
-Created two Dockerfiles.
-
-===> spark-master <===
-
-* To create a spark master
-* To start the spark master
-* Master will listen on port 7077,8080,6066
-* The service name should be "spark-master"
-
-
-===> spark-slave <===
-
-* To create a spark slave
-* To start the spark slave and connect to the spark master.
-* It will try to connect the spark master listening on the port 7077
-* The service running the spark master should be named as "spark-master"
-
-
-===> Set up <===
-
-* Create the swarm by creating the manager, and joining the worker nodes.
-* Create the overlay network for the swarm.
-* Start the spark-master service. Use the user defined network. Publish port 8080.
-* Start the spark slave service. 
-* To see the logs of the containers running the service, get the container names using the 
-  command
-	docker ps -a | head -5
-        docker logs <containerName>
-
-
-
-===> Issues <===
-
-* After publishing the port 8080 to the host machine, spark-master is listening on ingress interface 
-  instead of the user defined network.
-* Due to the change of the listening interface of the spark-master, spark slave is unable to connect 
-  the spark master.
-* The setup works fine if we are not publishing the ports while creating the spark-master container.
+Contain Images for 
+- mysql-5.6
+- spark
+   - spark 1.6
+   - spark 2.0
+   - spark 2.1
+- hadoop
+   - hadoop 2.7
+- tensorflow 1.1
+   - GPU
+   - CPU

@@ -22,13 +22,15 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 #RUN mkdir -p /var/jenkins_home && chown -R jenkins /var/jenkins_home
 #ADD init.groovy /tmp/WEB-INF/init.groovy
 #RUN apt-get install -y zip && cd /tmp && zip -g /usr/share/jenkins/jenkins.war WEB-INF/init.groovy
-#USER jenkins
+USER jenkins
 
 # VOLUME /var/jenkins_home - bind this in via -v if you want to make this persistent.
-#ENV JENKINS_HOME /var/jenkins_home
+ENV JENKINS_HOME /var/lib/jenkins
 
 # for main web interface:
-#EXPOSE 8080 
+EXPOSE 8080 
 
 # will be used by attached slave agents:
 #EXPOSE 50000 
+
+ENTRYPOINT ["/usr/bin/service", "jenkins", "start"]

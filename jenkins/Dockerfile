@@ -12,20 +12,23 @@ RUN wget -q -O - http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key | su
 RUN echo deb http://pkg.jenkins-ci.org/debian-stable binary/ >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y jenkins
 
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
-    && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" \
-    && gpg --verify /usr/local/bin/gosu.asc \
-    && rm /usr/local/bin/gosu.asc \
-    && chmod +x /usr/local/bin/gosu
-
+#RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+#RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
+#    && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" \
+#    && gpg --verify /usr/local/bin/gosu.asc \
+#    && rm /usr/local/bin/gosu.asc \
+#    && chmod +x /usr/local/bin/gosu
+#
+#RUN echo "#!/bin/bash \n\ 
+#    service jenkins start" > /root/startjenkins.sh && \
+#    chmod +x /root/startjenkins.sh
 #RUN mkdir -p /var/jenkins_home && chown -R jenkins /var/jenkins_home
 #ADD init.groovy /tmp/WEB-INF/init.groovy
 #RUN apt-get install -y zip && cd /tmp && zip -g /usr/share/jenkins/jenkins.war WEB-INF/init.groovy
-USER jenkins
+#USER jenkins
 
 # VOLUME /var/jenkins_home - bind this in via -v if you want to make this persistent.
-ENV JENKINS_HOME /var/lib/jenkins
+#ENV JENKINS_HOME /var/lib/jenkins
 
 # for main web interface:
 EXPOSE 8080 
@@ -33,4 +36,9 @@ EXPOSE 8080
 # will be used by attached slave agents:
 #EXPOSE 50000 
 
-ENTRYPOINT ["/usr/bin/service", "jenkins", "start"]
+COPY startjenkins.sh /root
+ENTRYPOINT "/root/startjenkins.sh"
+#CMD ["/usr/bin/service", "jenkins", "start"]
+#USER jenkins
+
+

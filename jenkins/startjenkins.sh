@@ -3,6 +3,7 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
 NAME=jenkins
+#DAEMON=/usr/bin/daemon
 
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
@@ -25,5 +26,7 @@ fi
 
 do_start()
 {
-    $DAEMON $DAEMON_ARGS -- $JAVA $JAVA_ARGS -jar $JENKINS_WAR $JENKINS_ARG
+    $JAVA $JAVA_ARGS -jar $JENKINS_WAR $JENKINS_ARG
 }
+
+do_start
